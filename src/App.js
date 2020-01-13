@@ -39,6 +39,8 @@ class App extends Component {
 
   // apaga todo
   delTodo = (id) => {
+    // a partir do array "todos" original, retorna um array com todos os outros itens que sao diferentes da id clicada em questao
+    // o operador de propagacao (...) eh usado para redistribuir os ids no novo array "todos"
     this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
   }
 
