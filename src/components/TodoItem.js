@@ -38,6 +38,10 @@ export class TodoItem extends Component {
     }
 
     render() {
+        
+        // destructuring de props
+        const { id, title } = this.props.todo;
+
         return (
             //// exemplo de estilo inline
             // <div style={{ backgroundColor: '#f4f4f4'}}> 
@@ -49,8 +53,9 @@ export class TodoItem extends Component {
                     {/* linha de exemplo abaixo, caso queiramos usar "function(){}" ao inves de arrow functions */}
                     {/* <input type="checkbox" onChange={this.markComplete.bind(this)} /> {' '} */}
                     {/* props.markComplete naixo chama a prop respectiva em Todos */}
-                    <input type="checkbox" onChange={this.props.markComplete.bind(this, this.props.todo.id)} /> {' '}
-                    { this.props.todo.title }
+                    <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {' '}
+                    { title }
+                    <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>x</button>
                 </p>
             </div>
         )
@@ -59,6 +64,16 @@ export class TodoItem extends Component {
 
 TodoItem.propTypes = { 
     todo: PropTypes.object.isRequired
+}
+
+const btnStyle = {
+    background: '#ff0000',
+    color: '#fff',
+    border: 'none',
+    padding: '5px 9px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    float: 'right'
 }
 
 //// variavel para deifnir estilo do elemento com variavel

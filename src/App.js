@@ -14,7 +14,7 @@ class App extends Component {
       {
         id: 2,
         title: 'Diner with wife',
-        completed: true
+        completed: false
       },
       {
         id: 3,
@@ -24,14 +24,28 @@ class App extends Component {
     ]
   }
 
-  markComplete = () => {
-    console.log('Hello from App.js')
+  // marca/desmarca item como completado
+  markComplete = (id) => {
+    // setState eh um componente do React
+    this.setState({ todos: this.state.todos.map(todo => {
+      if(todo.id === id){
+        // propriedade completed recebe o oposto do estado atual
+        todo.completed = !todo.completed;
+      };
+
+      return todo;
+    }) })
+  }
+
+  // apaga todo
+  delTodo = (id) => {
+    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
   }
 
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete} />
+        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
       </div>
     );
   }

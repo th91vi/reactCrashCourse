@@ -7,7 +7,7 @@ class Todos extends Component {
     // avalia todos como map, de forma similar a um forEach
     return this.props.todos.map((todo) => (
         // props.markComplete chama a prop respectiva em App
-        <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete}/> // prop key foi inserida pois cada elemento filho em um array de ter uma key unica para o prop
+        <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete} delTodo={this.props.delTodo} /> // prop key foi inserida pois cada elemento filho em um array de ter uma key unica para o prop
     ));
   }
 }
