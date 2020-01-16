@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Todos from './components/Todos'
+import Todos from './components/Todos';
+import Header from './components/layout/header';
+import AddTodo from './components/AddTodo';
+import uuid from 'uuid';
 
 import './App.css';
 
@@ -7,17 +10,17 @@ class App extends Component {
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(), // v4() gera uma id aleatória
         title: 'Take out the trash',
         completed: false
       },
       {
-        id: 2,
+        id: uuid.v4(),
         title: 'Diner with wife',
         completed: false
       },
       {
-        id: 3,
+        id: uuid.v4(),
         title: 'Meeting with boss',
         completed: false
       },
@@ -37,17 +40,31 @@ class App extends Component {
     }) })
   }
 
-  // apaga todo
+  // apaga Todo
   delTodo = (id) => {
     // a partir do array "todos" original, retorna um array com todos os outros itens que sao diferentes da id clicada em questao
     // o operador de propagacao (...) eh usado para redistribuir os ids no novo array "todos"
     this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] });
   }
 
+  // adiciona Todo
+  addTodo = (title) => {
+    const newTodo = {
+      id: uuid.v4(),
+      title, // em ES6, esta linha equivale a title:tile
+      completed: false
+    }
+    this.setState({ todos: [...this.state.todos, newTodo] });
+  }
+
   render() {
     return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+        <div className="container">
+          <Header />
+          <AddTodo addTodo={this.addTodo} />
+          <Todos todos={this.state.todos} markComplete={this.markComplete} delTodo={this.delTodo} />
+        </div>
       </div>
     );
   }
